@@ -5,7 +5,9 @@
     "polymer": "Polymer/polymer#^1.9.0",
     "app-layout": "~2.0.0",
     "iron-flex-layout": "~2.0.0",
-    "paper-styles": "~2.0.0"
+    "paper-styles": "~2.0.0",
+    "paper-card": "PolymerElements/paper-card#~2.0.0",
+    "iron-pages": "~2.0.0"
   },
   "devDependencies": {
     "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
