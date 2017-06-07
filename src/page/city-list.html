@@ -1,5 +1,6 @@
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../bower_components/paper-styles/color.html">
 
 <link rel="import" href="../element/abstract-weather-card-content.html">
 
@@ -11,6 +12,9 @@
                 padding: 14px;
                 @apply --layout-vertical;
                 @apply --layout-center;
+
+                height: 100%;
+                background-color: var(--paper-grey-200);
             }
         </style>
         
@@ -36,7 +40,16 @@
                                 "description": "light rain",
                                 "icon": "10n"
                             }
-                        ]
+                        ],
+                        "main": {
+                            "temp": 286.164,
+                            "pressure": 1017.58,
+                            "humidity": 96,
+                            "temp_min": 286.164,
+                            "temp_max": 286.164,
+                            "sea_level": 1027.69,
+                            "grnd_level": 1017.58
+                        }
                     }
                 }
             }

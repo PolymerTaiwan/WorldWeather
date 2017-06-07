@@ -1,5 +1,6 @@
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../../bower_components/paper-styles/color.html">
 
 <link rel="import" href="weather-icon.html">
 
@@ -11,12 +12,39 @@
                 @apply --layout-horizontal;
                 @apply --layout-center;
             }
+
+            weather-icon {
+                width: 100px;
+                height: 100px;
+                margin-right: 20px;
+            }
+
+            h2 {
+                margin-bottom: 0.2em;
+            }
+
+            span.auxiliary {
+                color: var(--paper-grey-500);
+            }
+
+            #tempText {
+                font-size: 2em;
+                color: var(--paper-grey-700);
+            }
         </style>
         
         <weather-icon
             icon-code="[[rawData.weather.0.icon]]"></weather-icon>
         <div class="layout vertical start">
-            <h3>[[rawData.name]]</h3>
+            <h2>[[rawData.name]]</h2>
+
+            <span id="tempText">
+                [[_evalTempText(rawData.main.temp_min, rawData.main.temp_max)]]
+            </span>
+
+            <span class="auxiliary">
+                [[rawData.weather.0.description]]
+            </span>
         </div>
 
     </template>
@@ -28,6 +56,24 @@
                 rawData: {
                     type: Object,
                     value: {}
+                }
+            },
+
+            _tempK2C: function(k){
+                return k - 273.15;
+            },
+
+            _evalTempText: function(minTemp, maxTemp){
+                minTemp = this._tempK2C(minTemp);
+                maxTemp = this._tempK2C(maxTemp);
+
+                if(maxTemp - minTemp < 2){
+                    var avg = (minTemp + maxTemp) / 2;
+                    return avg.toFixed(0) + '°C';
+                }else{
+                    return minTemp.toFixed(0) + '°C'
+                            + ' ~ '
+                            + maxTemp.toFixed(0) + '°C';
                 }
             }
         });
