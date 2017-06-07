@@ -1,16 +1,45 @@
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+
+<link rel="import" href="../element/abstract-weather-card-content.html">
 
 <dom-module id="city-list-page">
     <template>
-        <style>
+        <style include="iron-flex iron-flex-alignment">
             :host {
                 display: block;
+                padding: 14px;
+                @apply --layout-vertical;
+                @apply --layout-center;
             }
         </style>
         
+        <paper-card>
+          <abstract-weather-content class="card-content"
+            raw-data="[[_dummyData]]"></abstract-weather-content>
+        </paper-card>
     </template>
     <script>
         Polymer({
-            is: 'city-list-page'
+            is: 'city-list-page',
+
+            properties: {
+                _dummyData: {
+                    type: Object,
+                    readOnly: true,
+                    value: {
+                        name: "London",
+                        weather: [
+                            {
+                                "id": 500,
+                                "main": "Rain",
+                                "description": "light rain",
+                                "icon": "10n"
+                            }
+                        ]
+                    }
+                }
+            }
         });
     </script>
 </dom-module>
