@@ -1,16 +1,35 @@
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+
+<link rel="import" href="weather-icon.html">
 
 <dom-module id="abstract-weather-content">
     <template>
-        <style>
+        <style include="iron-flex iron-flex-alignment">
             :host {
                 display: block;
+                @apply --layout-horizontal;
+                @apply --layout-center;
             }
         </style>
         
+        <weather-icon
+            icon-code="[[rawData.weather.0.icon]]"></weather-icon>
+        <div class="layout vertical start">
+            <h3>[[rawData.name]]</h3>
+        </div>
+
     </template>
     <script>
         Polymer({
-            is: 'abstract-weather-content'
+            is: 'abstract-weather-content',
+
+            properties: {
+                rawData: {
+                    type: Object,
+                    value: {}
+                }
+            }
         });
     </script>
 </dom-module>
