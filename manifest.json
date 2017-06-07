@@ -1,0 +1,6 @@
+{
+  "name": "WorldWearther",
+  "short_name": "WorldWearther",
+  "start_url": "/",
+  "display": "standalone"
+}
