@@ -1,4 +1,8 @@
-<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/app-layout/app-header-layout/app-header-layout.html">
+<link rel="import" href="../../bower_components/app-layout/app-header/app-header.html">
+<link rel="import" href="../../bower_components/app-layout/app-scroll-effects/effects/waterfall.html">
+<link rel="import" href="../../bower_components/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="../../bower_components/paper-styles/color.html">
 
 <dom-module id="weather-dashboard">
   <template>
@@ -6,22 +10,28 @@
       :host {
         display: block;
       }
+
+      app-header {
+        background-color: var(--paper-purple-500);
+        color: white;
+      }
     </style>
-    <h2>Hello [[prop1]]</h2>
+    
+    <app-header-layout fullbleed has-scrolling-region>
+      <app-header slot="header" 
+        reveals condenses effects="waterfall">
+        <app-toolbar>
+          <div main-title>World Weather</div>
+        </app-toolbar>
+      </app-header>
+    </app-header-layout>
+
   </template>
 
   <script>
     Polymer({
 
       is: 'weather-dashboard',
-
-      properties: {
-        prop1: {
-          type: String,
-          value: 'weather-dashboard',
-        },
-      },
-
     });
   </script>
 </dom-module>
