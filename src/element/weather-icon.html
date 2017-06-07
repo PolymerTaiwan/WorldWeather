@@ -1,0 +1,62 @@
+<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
+
+<dom-module id="weather-icon">
+    <template>
+        <style>
+            :host {
+                display: block;
+            }
+
+            iron-pages img {
+                width: 100%;
+                height: 100%;
+            }
+        </style>
+        
+        <iron-pages selected="[[_computeIndex(_iconCodeNum)]]">
+            <img src="../../images/sun.svg"/>
+            <img src="../../images/cloud.svg"/>
+            <img src="../../images/cloudy.svg"/>
+            <img src="../../images/rain.svg"/>
+            <img src="../../images/snowflake.svg"/>
+        </iron-pages>
+
+    </template>
+    <script>
+        Polymer({
+            is: 'weather-icon',
+
+            properties: {
+                iconCode: {
+                    type: String,
+                    value: "01n"
+                },
+                _iconCodeNum: {
+                    type: Number,
+                    computed: '_evalIconCode(iconCode)'
+                }
+            },
+
+            _evalIconCode: function(iconCode){
+                var numPart = iconCode.substr(0, iconCode.length - 1);
+                if(numPart && numPart.length > 0){
+                    return Number.parseInt(numPart);
+                }else return 1;
+            },
+
+            _computeIndex: function(code){
+                switch(code){
+                    case 1: return 0; // sun
+                    case 2: return 1; // cloud
+                    case 3:
+                    case 4: return 2; // cloudy
+                    case 9:
+                    case 10:
+                    case 11: return 3; // rain
+                    case 13: return 4; // snowflake
+                    default: return 2;
+                }
+            }
+        });
+    </script>
+</dom-module>
