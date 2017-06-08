@@ -1,33 +1,29 @@
-# \<WorldWearther\>
+World Weather
+=============
+A simple sample app built with Polymer(1.0)
 
+<img src="images/screenshot.png"></img>
 
+OpenWeatherMap API Key
+----------------------
+This sample use weather data from [OpenWeatherMap](https://openweathermap.org/). So please implement your own `api-key-storage` element inside `src/element/key-storage.html` file.
 
-## Install the Polymer-CLI
-
-First, make sure you have the [Polymer CLI](https://www.npmjs.com/package/polymer-cli) installed. Then run `polymer serve` to serve your application locally.
-
-## Viewing Your Application
-
+Sample imeplementation:
 ```
-$ polymer serve
-```
+<script>
+    Polymer({
+        is: 'api-key-storage',
 
-## Building Your Application
-
-```
-$ polymer build
-```
-
-This will create builds of your application in the `build/` directory, optimized to be served in production. You can then serve the built versions by giving `polymer serve` a folder to serve from:
-
-```
-$ polymer serve build/default
-```
-
-## Running Tests
-
-```
-$ polymer test
+        properties: {
+            openWeather: {
+                type: String,
+                value: 'YOUR_API_KEY',
+                readOnly: true,
+                notify: true
+            }
+        }
+    });
+</script>
 ```
 
-Your application is already set up to be tested via [web-component-tester](https://github.com/Polymer/web-component-tester). Run `polymer test` to run your application's test suite locally.
+For more information about how to get an API key, please refer the [official guide](https://openweathermap.org/appid).
