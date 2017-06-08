@@ -2,9 +2,13 @@
 <link rel="import" href="../../bower_components/app-layout/app-header/app-header.html">
 <link rel="import" href="../../bower_components/app-layout/app-scroll-effects/effects/waterfall.html">
 <link rel="import" href="../../bower_components/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="../../bower_components/paper-styles/color.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../bower_components/paper-dialog/paper-dialog.html">
 
 <link rel="import" href="city-list.html">
+<link rel="import" href="../element/info-dialog-content.html">
 
 <dom-module id="weather-dashboard">
   <template>
@@ -24,9 +28,14 @@
         reveals condenses effects="waterfall">
         <app-toolbar>
           <div main-title>World Weather</div>
+          <paper-icon-button icon="info-outline"
+            on-tap="_onInfoButClick"></paper-icon-button>
         </app-toolbar>
       </app-header>
 
+      <paper-dialog id="infoDialog">
+        <info-dialog-content></info-dialog-content>
+      </paper-dialog>
       <city-list-page></city-list-page>
     </app-header-layout>
 
@@ -36,6 +45,10 @@
     Polymer({
 
       is: 'weather-dashboard',
+
+      _onInfoButClick: function(){
+        this.$.infoDialog.toggle();
+      }
     });
   </script>
 </dom-module>
