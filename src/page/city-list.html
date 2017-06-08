@@ -1,9 +1,11 @@
 <link rel="import" href="../../bower_components/app-layout/app-grid/app-grid-style.html">
 <link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
 <link rel="import" href="../../bower_components/paper-card/paper-card.html">
 <link rel="import" href="../../bower_components/paper-styles/color.html">
 
 <link rel="import" href="../element/abstract-weather-card-content.html">
+<link rel="import" href="../element/key-storage.html">
 
 <dom-module id="city-list-page">
     <template>
@@ -26,31 +28,21 @@
             }
         </style>
 
+        <api-key-storage
+            open-weather="{{_apiKey}}"></api-key-storage>
+
         <div class="app-grid">
-            <paper-card>
-                <abstract-weather-content class="card-content"
-                    raw-data="[[_dummyData]]"></abstract-weather-content>
-            </paper-card>
-
-            <paper-card>
-                <abstract-weather-content class="card-content"
-                    raw-data="[[_dummyData]]"></abstract-weather-content>
-            </paper-card>
-
-            <paper-card>
-                <abstract-weather-content class="card-content"
-                    raw-data="[[_dummyData]]"></abstract-weather-content>
-            </paper-card>
-
-            <paper-card>
-                <abstract-weather-content class="card-content"
-                    raw-data="[[_dummyData]]"></abstract-weather-content>
-            </paper-card>
-
-            <paper-card>
-                <abstract-weather-content class="card-content"
-                    raw-data="[[_dummyData]]"></abstract-weather-content>
-            </paper-card>
+            <template is="dom-repeat" items="[[_siteList]]">
+                <paper-card>
+                    <iron-ajax
+                        auto
+                        url="http://api.openweathermap.org/data/2.5/weather?appid=[[_apiKey]]&id=[[item.id]]"
+                        handle-as="json"
+                        last-response="{{item.response}}"></iron-ajax>
+                    <abstract-weather-content class="card-content"
+                        raw-data="[[item.response]]"></abstract-weather-content>
+                </paper-card>
+            </template>
         </div>
             
     </template>
@@ -59,29 +51,41 @@
             is: 'city-list-page',
 
             properties: {
-                _dummyData: {
-                    type: Object,
+                _siteList: {
+                    type: Array,
                     readOnly: true,
-                    value: {
-                        name: "London",
-                        weather: [
-                            {
-                                "id": 500,
-                                "main": "Rain",
-                                "description": "light rain",
-                                "icon": "10n"
-                            }
-                        ],
-                        "main": {
-                            "temp": 286.164,
-                            "pressure": 1017.58,
-                            "humidity": 96,
-                            "temp_min": 286.164,
-                            "temp_max": 286.164,
-                            "sea_level": 1027.69,
-                            "grnd_level": 1017.58
+                    value: [
+                        {
+                            city: 'London',
+                            state: 'uk',
+                            id: '2643743'
+                        },
+                        {
+                            city: 'Taipei',
+                            state: 'tw',
+                            id: '1668341'
+                        },
+                        {
+                            city: 'New York',
+                            state: 'us',
+                            id: '5128638'
+                        },
+                        {
+                            city: 'Berlin',
+                            state: 'de',
+                            id: '2950159'
+                        },
+                        {
+                            city: 'Paris',
+                            state: 'fr',
+                            id: '2988507'
+                        },
+                        {
+                            city: 'Moscow',
+                            state: 'ru',
+                            id: '524901'
                         }
-                    }
+                    ]
                 }
             }
         });
